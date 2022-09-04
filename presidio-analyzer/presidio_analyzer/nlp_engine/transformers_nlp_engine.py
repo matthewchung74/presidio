@@ -56,10 +56,12 @@ class TransformersComponent:
         res = self.nlp(doc.text)
         ents = []
         for d in res:
-            span = doc.char_span(d["start"], d["end"], label=d["entity_group"])
-            if span is not None:
-                span._.confidence_score = d["score"]
-                ents.append(span)
+            span = doc.char_span(d["start"], d["end"], label=d["entity_group"], alignment_mode="expand")
+            span._.confidence_score = d["score"]
+            ents.append(span)
+            # if span is not None:
+            #     span._.confidence_score = d["score"]
+            #     ents.append(span)
         doc.ents = ents
         return doc
 
