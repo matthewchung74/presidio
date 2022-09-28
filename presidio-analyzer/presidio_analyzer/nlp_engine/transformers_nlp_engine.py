@@ -56,6 +56,7 @@ class TransformersComponent:
         res = self.nlp(doc.text)
         ents = []
         for d in res:
+            span = doc.char_span(d["start"], d["end"], label=d["entity_group"])
 #             span = doc.char_span(d["start"], d["end"], label=d["entity_group"], alignment_mode="contract")
 #             span = doc.char_span(d["start"], d["end"], label=d["entity_group"], alignment_mode="expand")
             if span is not None:
